@@ -1,0 +1,27 @@
+{
+  "name": "heymychifo",
+  "version": "1.0.0",
+  "description": "Recipes web application  to taste several meals from all over the globe",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seifChamsi/HEYMYCHIFO.git"
+  },
+  "author": "Saifeddin Chamsi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seifChamsi/HEYMYCHIFO/issues"
+  },
+  "homepage": "https://github.com/seifChamsi/HEYMYCHIFO#readme",
+  "devDependencies": {
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.2.1"
+  }
+}
