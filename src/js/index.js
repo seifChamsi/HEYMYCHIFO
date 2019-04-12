@@ -1,4 +1,3 @@
-// Global app controller
-import x from './test';
+import {add as a,multiply as m ,id} from './views/SearchView';
 
-console.log(`the number issssss ${x}`); 
+console.log(`Using imported functions ${a(id,2)} and ${m(3,5)} hell yeah`)
