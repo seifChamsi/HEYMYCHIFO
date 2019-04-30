@@ -1,14 +1,35 @@
-import axios from 'axios';
+import Search from './models/Search';
+import * as SearchView from './views/Searchview'
+import {elements} from './views/base';
 
-const getResults = async (query) =>{
+const state = {
 
-    const apiKey = "8044242a42a64a10528b2d9863604d12";
-    const proxy = 'https://cors-anywhere.herokuapp.com/';
-    let res = await axios(`${proxy}https://www.food2fork.com/api/search?key=${apiKey}&q=${query}
-    `);
-    const recipes = res.data.recipes;
-    console.log(recipes);
-    
+};
+
+const searchControl = async()=>{
+    //Get query from view
+    const query = SearchView.getInput();
+    console.log(query);
+    if (query) {
+        //new search object to add to state
+        state.search = new Search(query);
+
+        //prepare UI for the result
+        SearchView.clearInput();
+        SearchView.clearList();
+        //search for the recipes
+       await state.search.getResults(); 
+
+        // render restults  on UI
+        SearchView.renderResults(state.search.result);
+        
+    }
 }
 
-getResults("iced tea");
+elements.searchForm.addEventListener('submit',e=>{
+    e.preventDefault();
+    searchControl()
+
+})
+
+
