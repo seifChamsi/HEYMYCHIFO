@@ -21,7 +21,8 @@ const searchControl = async()=>{
     
     //new search object to add to state
     state.search = new Search(query);
-
+    try {
+    
     //prepare UI for the result
     SearchView.clearInput();
     SearchView.clearList();
@@ -34,6 +35,12 @@ const searchControl = async()=>{
     // render restults  on UI
     clearLoader();
     SearchView.renderResults(state.search.result);
+    }
+
+    catch (error) {
+        alert(error);
+    }
+
         
     }
 }
@@ -71,17 +78,25 @@ const controlRecipe = async ()=>{
 
         //create new Recipe object
         state.recipe = new Recipe(id);
+try {
 
-        //get Recipe data
-        await state.recipe.getRecipe();
+     //get Recipe data
+     await state.recipe.getRecipe();
 
-        //calculate servings and time
-        state.recipe.calcTime();
-        state.recipe.calcServings();
-        //render the recipe
-        console.log(state.recipe);
-        console.log(state)
+     //calculate servings and time
+     state.recipe.calcTime();
+     state.recipe.calcServings();
+     //render the recipe
+     console.log(state.recipe);
+    
+}
+catch (error)
+{
+    alert('something went wrong');
+}
+       
     }
 }
 
-window.addEventListener('hashchange',controlRecipe);
+//double function eventListener
+['hashchange','load'].forEach(el=>window.addEventListener(el,controlRecipe));
