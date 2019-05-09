@@ -77,13 +77,11 @@ const renderButtons = (page,numResults,resPerPage)=>{
 };
 
 export const renderResults = (recipes,page = 1,resPerPage = 10) =>{
-    //render result of current page
-    const start = (page-1)*resPerPage;
+    const start = (page - 1) * resPerPage;
     const end = page * resPerPage;
-    
-    //this to get only 10 results per page    
-    recipes.slice(start,end).forEach(renderRecipe);
 
-    //render pagination buttons
-    renderButtons(page,recipes.length,resPerPage)
+    recipes.slice(start, end).forEach(renderRecipe);
+
+    // render pagination buttons
+    renderButtons(page, recipes.length, resPerPage);
 }

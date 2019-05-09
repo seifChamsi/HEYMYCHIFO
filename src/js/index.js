@@ -1,13 +1,13 @@
 import Search from './models/Search';
 import Recipe from "./models/Recipe";
 import * as SearchView from './views/Searchview'
+import * as RecipeView from './views/RecipeView'
 import {elements,renderLoader, clearLoader} from './views/base';
+import { stat } from 'fs';
 
 
 //state of the app
-const state = {
-
-};  
+const state = {};  
 
 /*
  **Search Controller 
@@ -31,14 +31,16 @@ const searchControl = async()=>{
     
     //search for the recipes
     await state.search.getResults(); 
-
+        console.log(state.search.result);
+        
     // render restults  on UI
     clearLoader();
     SearchView.renderResults(state.search.result);
     }
 
     catch (error) {
-        alert(error);
+        console.log(error);
+        clearLoader();
     }
 
         
@@ -75,6 +77,7 @@ const controlRecipe = async ()=>{
 
     if (id) {
         //prepare the UI for the changes
+        renderLoader(elements.recipe);
 
         //create new Recipe object
         state.recipe = new Recipe(id);
@@ -82,17 +85,21 @@ try {
 
      //get Recipe data
      await state.recipe.getRecipe();
+     state.recipe.parseIngredients();
 
      //calculate servings and time
      state.recipe.calcTime();
      state.recipe.calcServings();
+     
      //render the recipe
+     clearLoader();
+    RecipeView.renderRecipe(state.recipe);
      console.log(state.recipe);
     
 }
 catch (error)
 {
-    alert('something went wrong');
+    console.log('something went wrong');
 }
        
     }
